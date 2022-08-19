@@ -24,7 +24,7 @@ def resetPassword(data):
         arguments = (data["Email"], data["NewPassword"])
         helpers.masterCursor.execute("update Users set ResetPassword = 0 where email = %s and Password = SHA1(%s)", arguments)
 
-        helpers.masterCursor.execute("update Users set AccountTypeFlag = 'General' where email = %s and Password = SHA1(%s)", arguments)
+        helpers.masterCursor.execute("update Users set AccountTypeFlag = 'General' where email = %s and Password = SHA1(%s) and AccountTypeFlag = 'Invited'", arguments)
         helpers.masterDB.commit()
         return helpers.buildSuccessResponse("None")
 
