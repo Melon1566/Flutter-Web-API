@@ -19,7 +19,7 @@ def resetPassword(data):
 
 
         arguments = (data["NewPassword"], decryptedString, data["OldPassword"], data["OldPassword"])
-        helpers.masterCursor.execute("update Users set Password = SHA1(%s) where email = %s and (Password = SHA1(%s) or Password = %s)", arguments)
+        helpers.masterCursor.execute("update Users set Password = SHA1(%s) where email = %s and (Password = SHA1(%s) or Password = %s) and ResetPassword = 1", arguments)
 
         arguments = (data["Email"], data["NewPassword"])
         helpers.masterCursor.execute("update Users set ResetPassword = 0 where email = %s and Password = SHA1(%s)", arguments)
