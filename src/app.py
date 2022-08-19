@@ -57,16 +57,14 @@ def requestHandler(event, context):
 """
 ######################################################################################
 
-app = Flask(__name__)
-CORS(app)
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-@app.route('/AppDataHandler', methods=['POST', 'GET'])
-def requestHandler():
-    requestData = request.get_json() 
-
+def requestHandler(event, context):
+    body = ""
+    if(event.get("body") is bytes):
+        body = event.get("body").decode("utf-8")
+    else:
+        body = event.get("body")
+    
+    requestData = json.loads(body) 
 
     ###################################################################################
     if requestData['RequestType'] == "ResetPassword":
