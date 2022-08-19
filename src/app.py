@@ -11,6 +11,8 @@ from mailchimp_transactional.api_client import ApiClientError
 import concurrent.futures
 import operator
 import helpers
+from password import resetPassword
+import password
 
 # OUR SOURCE FILES
 
@@ -67,6 +69,9 @@ def requestHandler():
 
 
     ###################################################################################
+    if requestData['RequestType'] == "ResetPassword":
+        print("Getting Role")
+        return password.resetPassword(requestData['Data'])
 
 
 
